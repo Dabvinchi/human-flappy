@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://do1f304hnj3gw"]
+
+[ext_resource type="Script" uid="uid://h4t4oktcrem1" path="res://scenes/main_menu.gd" id="1_0ykhv"]
+[ext_resource type="Texture2D" uid="uid://dkktbp1ehf81h" path="res://sprites/background/background_default.png" id="1_yqorp"]
+[ext_resource type="Texture2D" uid="uid://62wy6c455euh" path="res://sprites/ui/logo.png" id="2_2wh52"]
+[ext_resource type="AudioStream" uid="uid://b4xyqa3yyowiu" path="res://audio/menu_music.mp3" id="4_ow34m"]
+[ext_resource type="Texture2D" uid="uid://b7gk6v27xbbjn" path="res://sprites/environment/bird_flight_sheet.png" id="5_l72w3"]
+[ext_resource type="Script" uid="uid://dmdc6iiw2yan0" path="res://scripts/menu_bird.gd" id="6_826wr"]
+[ext_resource type="Texture2D" uid="uid://b4legym1t58jv" path="res://sprites/environment/yacht_bob_sheet.png" id="7_mipys"]
+[ext_resource type="Script" uid="uid://crwl0h3c5yv2s" path="res://scripts/menu_yacht.gd" id="8_8a8k8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_826wr"]
+atlas = ExtResource("5_l72w3")
+region = Rect2(0, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ucygd"]
+atlas = ExtResource("5_l72w3")
+region = Rect2(543, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mipys"]
+atlas = ExtResource("5_l72w3")
+region = Rect2(1086, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a8k8"]
+atlas = ExtResource("5_l72w3")
+region = Rect2(1629, 0, 543, 724)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8cp08"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_826wr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ucygd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mipys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a8k8")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7la6k"]
+atlas = ExtResource("7_mipys")
+region = Rect2(0, 0, 768, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nypq"]
+atlas = ExtResource("7_mipys")
+region = Rect2(768, 0, 768, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bky6r"]
+atlas = ExtResource("7_mipys")
+region = Rect2(0, 512, 768, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4mxc"]
+atlas = ExtResource("7_mipys")
+region = Rect2(768, 512, 768, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_addgn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7la6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nypq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bky6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4mxc")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="MainMenu" type="Control" unique_id=63724988]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ykhv")
+
+[node name="MenuBackground" type="TextureRect" parent="." unique_id=471306770]
+z_index = -10
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("1_yqorp")
+expand_mode = 1
+
+[node name="Bird" type="AnimatedSprite2D" parent="." unique_id=1658641485]
+position = Vector2(-33.062485, 256)
+scale = Vector2(0.09231118, 0.08011043)
+sprite_frames = SubResource("SpriteFrames_8cp08")
+frame = 3
+frame_progress = 0.93055224
+script = ExtResource("6_826wr")
+
+[node name="GameLogo" type="TextureRect" parent="." unique_id=1043442694]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 70.0
+offset_right = 840.0
+offset_bottom = 270.0
+texture = ExtResource("2_2wh52")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayButton" type="Button" parent="." unique_id=719257729]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 329.0
+offset_right = 790.0
+offset_bottom = 409.0
+text = "PLAY"
+
+[node name="BestScoreLabel" type="Label" parent="." unique_id=489351083]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 413.0
+offset_right = 790.0
+offset_bottom = 463.0
+text = "BEST SCORE: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=716397042]
+stream = ExtResource("4_ow34m")
+autoplay = true
+
+[node name="Yacht" type="AnimatedSprite2D" parent="." unique_id=1469182330]
+position = Vector2(771.99994, 571.00006)
+scale = Vector2(0.10572924, 0.12167965)
+sprite_frames = SubResource("SpriteFrames_addgn")
+frame = 1
+frame_progress = 0.90653485
+script = ExtResource("8_8a8k8")
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

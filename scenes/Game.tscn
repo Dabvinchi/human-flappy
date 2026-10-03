@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://crkwrsw6jdm83"]
+
+[ext_resource type="PackedScene" uid="uid://c2slo6eirckbj" path="res://scenes/Player.tscn" id="1_ibkli"]
+[ext_resource type="Script" uid="uid://cutmvk6prmumg" path="res://scripts/game.gd" id="1_s0nni"]
+[ext_resource type="PackedScene" uid="uid://io2ghi8mv46p" path="res://scenes/PipePair.tscn" id="2_qbsmt"]
+[ext_resource type="Script" uid="uid://d1ts012hnfl8n" path="res://scripts/pipe_spawner.gd" id="3_cpr0p"]
+[ext_resource type="Texture2D" uid="uid://dwy03saw3xfim" path="res://sprites/environment/ground_default.png" id="3_kiw3p"]
+[ext_resource type="Script" uid="uid://bcollss60p368" path="res://scripts/game_ui.gd" id="4_78awf"]
+[ext_resource type="Texture2D" uid="uid://dkktbp1ehf81h" path="res://sprites/background/background_default.png" id="6_aug50"]
+[ext_resource type="AudioStream" uid="uid://brp343mrjliad" path="res://audio/ding.mp3" id="8_400sg"]
+[ext_resource type="AudioStream" uid="uid://kgv3w1b0pr2" path="res://audio/game_over.mp3" id="9_g4kob"]
+[ext_resource type="AudioStream" uid="uid://ckllgbmutskae" path="res://audio/background_music.mp3" id="10_qy1jj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_addgn"]
+size = Vector2(1152, 60)
+
+[node name="Game" type="Node2D" unique_id=454488572]
+script = ExtResource("1_s0nni")
+
+[node name="Player" parent="." unique_id=2088743465 instance=ExtResource("1_ibkli")]
+position = Vector2(250, 360)
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=172189717]
+position = Vector2(640, 690)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=939049231]
+shape = SubResource("RectangleShape2D_addgn")
+
+[node name="GroundVisual" type="Sprite2D" parent="Ground" unique_id=822900715]
+position = Vector2(3.8146973e-06, 80.000046)
+scale = Vector2(0.833, 0.749)
+texture = ExtResource("3_kiw3p")
+region_enabled = true
+region_rect = Rect2(0, 780, 1536, 244)
+
+[node name="PipeSpawner" type="Node2D" parent="." unique_id=2080948565]
+script = ExtResource("3_cpr0p")
+pipe_scene = ExtResource("2_qbsmt")
+
+[node name="PipeTimer" type="Timer" parent="PipeSpawner" unique_id=1251199111]
+wait_time = 2.0
+autostart = true
+
+[node name="GameUI" type="CanvasLayer" parent="." unique_id=1338870428]
+script = ExtResource("4_78awf")
+
+[node name="GameOverPanel" type="Panel" parent="GameUI" unique_id=353879863]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="GameUI/GameOverPanel" unique_id=1165435768]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 203.0
+offset_right = 838.0
+offset_bottom = 286.0
+theme_override_font_sizes/font_size = 60
+text = "GAME OVER!"
+
+[node name="Button" type="Button" parent="GameUI/GameOverPanel" unique_id=1647109965]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 288.0
+offset_right = 701.0
+offset_bottom = 319.0
+text = "PLAY AGAIN"
+
+[node name="ScoreLabel" type="Label" parent="GameUI" unique_id=335294285]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 50.0
+offset_right = 40.0
+offset_bottom = 117.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="BestScoreLabel" type="Label" parent="GameUI" unique_id=118555052]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 100.0
+offset_right = 52.0
+offset_bottom = 134.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "BEST SCORE: 0"
+
+[node name="PauseButton" type="Button" parent="GameUI" unique_id=2063838621]
+offset_left = 50.0
+offset_top = 30.0
+offset_right = 130.0
+offset_bottom = 90.0
+text = "Ⅱ"
+
+[node name="PausePanel" type="Panel" parent="GameUI" unique_id=1291985225]
+process_mode = 2
+offset_left = 390.0
+offset_top = 185.0
+offset_right = 890.0
+offset_bottom = 649.0
+
+[node name="PauseTitle" type="Label" parent="GameUI/PausePanel" unique_id=1265068360]
+layout_mode = 0
+offset_top = 25.0
+offset_right = 500.0
+offset_bottom = 95.0
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="GameUI/PausePanel" unique_id=686334363]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 120.0
+offset_right = 400.0
+offset_bottom = 190.0
+text = "RESUME"
+
+[node name="RestartButton" type="Button" parent="GameUI/PausePanel" unique_id=320585544]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 205.0
+offset_right = 400.0
+offset_bottom = 275.0
+text = "RESTART"
+
+[node name="MainMenuButton" type="Button" parent="GameUI/PausePanel" unique_id=249150063]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 290.0
+offset_right = 400.0
+offset_bottom = 360.0
+text = "MAIN MENU"
+
+[node name="ExitButton" type="Button" parent="GameUI/PausePanel" unique_id=488481063]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 375.0
+offset_right = 400.0
+offset_bottom = 445.0
+text = "EXIT GAME"
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1634296418]
+z_index = -10
+position = Vector2(640, 360)
+texture = ExtResource("6_aug50")
+
+[node name="ScoreSound" type="AudioStreamPlayer" parent="." unique_id=1518921450]
+stream = ExtResource("8_400sg")
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=1245927193]
+stream = ExtResource("9_g4kob")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1384496287]
+stream = ExtResource("10_qy1jj")
+autoplay = true
+
+[connection signal="game_over_triggered" from="Player" to="." method="_on_player_game_over_triggered"]
+[connection signal="game_over_triggered" from="Player" to="GameUI" method="_on_player_game_over_triggered"]
+[connection signal="timeout" from="PipeSpawner/PipeTimer" to="PipeSpawner" method="_on_pipe_timer_timeout"]
+[connection signal="pressed" from="GameUI/GameOverPanel/Button" to="GameUI" method="_on_button_pressed"]
+[connection signal="pressed" from="GameUI/PauseButton" to="GameUI" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="GameUI/PausePanel/ResumeButton" to="GameUI" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="GameUI/PausePanel/RestartButton" to="GameUI" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="GameUI/PausePanel/MainMenuButton" to="GameUI" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="GameUI/PausePanel/ExitButton" to="GameUI" method="_on_exit_button_pressed"]
